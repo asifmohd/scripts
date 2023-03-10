@@ -13,7 +13,9 @@ File.foreach(input_file) do |line|
     File.open(file_name, 'r').each_line.with_index do |code_line, line_num|
         if line_num == line_number
             if code_line.include?('public')
-                if code_line.include?('public class')
+                if code_line.include?('final public class')
+                    code_line.gsub!(/public /, '')
+                elsif code_line.include?('public class')
                     code_line.gsub!(/public /, 'final ')
                 else
                     code_line.gsub!(/public /, '')
